@@ -43,7 +43,7 @@ while True:
     snake.validate_direction_and_change()
     snake.change_head_position()
     game.score, food.food_pos = snake.snake_body_mechanism(game.score, food.food_pos, game.screen_width, game.screen_height)
-    snake.draw_snake(game.play_surface, game.white)
+    snake.draw_snake(game.play_surface, game.white, game.screen_width, game.screen_height)
 
     food.draw_food(game.play_surface)
 
