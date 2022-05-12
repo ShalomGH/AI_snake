@@ -12,7 +12,7 @@ class Snake:
         self.snake_color = snake_color
         # направление движение змеи, изначально
         # зададимся вправо
-        self.direction = "RIGHT"
+        self.direction = "False"
         # куда будет меняться напрвление движения змеи
         # при нажатии соответствующих клавиш
         self.change_to = self.direction
@@ -28,6 +28,8 @@ class Snake:
 
     def change_head_position(self):
         """Изменияем положение головы змеи"""
+        if self.direction == "False":
+            self.snake_head_pos[0] += 0
         if self.direction == "RIGHT":
             self.snake_head_pos[0] += 10
         elif self.direction == "LEFT":
@@ -62,14 +64,10 @@ class Snake:
         """Отображаем все сегменты змеи"""
         play_surface.fill(surface_color)
         for pos in self.snake_body:
-            # pygame.Rect(x,y, sizex, sizey)
-            pygame.draw.rect(
-                play_surface, self.snake_color, pygame.Rect(
-                    pos[0], pos[1], 10, 10))
+            pygame.draw.rect(play_surface, self.snake_color, pygame.Rect(pos[0], pos[1], 10, 10))
 
     def check_for_boundaries(self, game_over, screen_width, screen_height):
-        """Проверка, что столкунлись с концами экрана или сами с собой
-        (змея закольцевалась)"""
+        """Проверка, что столкунлись с концами экрана или сами с собой"""
         if any((
                 self.snake_head_pos[0] > screen_width - 10
                 or self.snake_head_pos[0] < 0,

@@ -24,16 +24,6 @@ class Game:
         # (сколько еды съели)
         self.score = 0
 
-    @staticmethod
-    def init_and_check_for_errors():
-        """Начальная функция для инициализации и
-           проверки как запустится pygame"""
-        check_errors = pygame.init()
-        if check_errors[1] > 0:
-            sys.exit()
-        else:
-            print('Ok')
-
     def set_surface_and_title(self):
         """Задаем surface(поверхность поверх которой будет все рисоваться)
         и устанавливаем загаловок окна"""
@@ -41,31 +31,10 @@ class Game:
             self.screen_width, self.screen_height))
         pygame.display.set_caption('Snake Game')
 
-    def event_loop(self, change_to):
-        """Функция для отслеживания нажатий клавиш игроком"""
-
-        # запускаем цикл по ивентам
-        for event in pygame.event.get():
-            # если нажали клавишу
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT or event.key == ord('d'):
-                    change_to = "RIGHT"
-                elif event.key == pygame.K_LEFT or event.key == ord('a'):
-                    change_to = "LEFT"
-                elif event.key == pygame.K_UP or event.key == ord('w'):
-                    change_to = "UP"
-                elif event.key == pygame.K_DOWN or event.key == ord('s'):
-                    change_to = "DOWN"
-                # нажали escape
-                elif event.key == pygame.K_ESCAPE:
-                    pygame.quit()
-                    sys.exit()
-        return change_to
-
     def refresh_screen(self):
         """обновляем экран и задаем фпс"""
         pygame.display.flip()
-        self.fps_controller.tick(23)
+        self.fps_controller.tick(8)
 
     def show_score(self, choice=1):
         """Отображение результата"""
