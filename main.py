@@ -3,12 +3,15 @@ import sys
 from snake import Snake
 from game import Game
 from food import Food
+from vision import Vision
 from func import init_and_check_for_errors
+
 
 colission_true = True
 game = Game()
 snake = Snake(game.green)
-food = Food(game.brown, game.screen_width, game.screen_height)
+food = Food(game.red, game.screen_width, game.screen_height)
+vision = Vision()
 pushed = False
 init_and_check_for_errors()
 game.set_surface_and_title()
@@ -43,9 +46,10 @@ while True:
     snake.validate_direction_and_change()
     snake.change_head_position()
     game.score, food.food_pos = snake.snake_body_mechanism(game.score, food.food_pos, game.screen_width, game.screen_height)
-    snake.draw_snake(game.play_surface, game.white, game.screen_width, game.screen_height)
 
+    snake.draw_snake(game.play_surface, game.white, game.screen_width, game.screen_height)
     food.draw_food(game.play_surface)
+    vision.snake_vision(game.play_surface, snake.snake_head_pos, game.screen_width, game.screen_height)
 
     if pushed and colission_true:
         snake.check_for_boundaries(game.game_over, game.screen_width, game.screen_height)

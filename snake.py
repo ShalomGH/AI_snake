@@ -13,7 +13,7 @@ class Snake:
         self.snake_color = snake_color
         # направление движение змеи, изначально
         # зададимся вправо
-        self.neighbors = np.zeros([11, 11])
+
         self.direction = "False"
         # куда будет меняться напрвление движения змеи
         # при нажатии соответствующих клавиш
@@ -67,27 +67,6 @@ class Snake:
         play_surface.fill(surface_color)
         for pos in self.snake_body:
             pygame.draw.rect(play_surface, self.snake_color, pygame.Rect(pos[0], pos[1], 10, 10))
-        for x in range(-5, 6):
-            for y in range(-5, 6):
-                temp_x = self.snake_head_pos[0] + x * 10 + 5
-                temp_y = self.snake_head_pos[1] + y * 10 + 5
-                pixel_color = play_surface.get_at((min(max(temp_x, 0),screen_width-1), min(max(temp_y, 0), screen_height-1)))
-                match pixel_color:
-                    case (255, 255, 255, 255):
-                        temp_color = 0
-                    case (0, 255, 0, 255):
-                        temp_color = 2
-                    case (165, 42, 42, 255):
-                        temp_color = 1
-                    case (0, 0, 0, 255):
-                        temp_color = 9
-                    case _:
-                        temp_color = 8
-                self.neighbors[x+5][y+5] = temp_color
-        print(self.neighbors)
-        print()
-
-                # pygame.draw.rect(play_surface, self.snake_color, pygame.Rect(self.snake_head_pos[0] + x * 10 + 5, self.snake_head_pos[1] + y * 10 + 5, 1, 1))
 
     def check_for_boundaries(self, game_over, screen_width, screen_height):
         """Проверка, что столкунлись с концами экрана или сами с собой"""
