@@ -7,7 +7,6 @@ from vision import Vision
 from settings import Settings
 from func import init_and_check_for_errors
 
-
 game = Game(Settings.FPS)
 snake = Snake(pygame.Color(Settings.SNAKE_COLOR))
 food = Food(Settings.FOOD_COLOR)

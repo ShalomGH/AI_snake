@@ -80,10 +80,10 @@ class Snake:
                 self.snake_head_pos[1] > Settings.SCREEN_H - 10
                 or self.snake_head_pos[1] < 0
         )):
-            game_over()
+            game_over(self)
         for block in self.snake_body[1:]:
             # проверка на то, что первый элемент(голова) врезался в
             # любой другой элемент змеи (закольцевались)
             if (block[0] == self.snake_head_pos[0] and
                     block[1] == self.snake_head_pos[1]):
-                game_over()
+                game_over(self)

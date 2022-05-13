@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 from settings import Settings
 
 
@@ -27,5 +28,10 @@ class Vision:
                             print(pixel_color)
                             temp_color = 1
                     self.neighbors[y + 5][x + 5] = temp_color
-        print(self.neighbors)
-        print()
+        fig, ax = plt.subplots()
+
+        ax.imshow(self.neighbors)
+
+        fig.set_figwidth(6)  # ширина и
+        fig.set_figheight(6)  # высота "Figure"
+        #plt.show()

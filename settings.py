@@ -11,3 +11,4 @@ class Settings:
     GAME_OVER_COLOR = 255, 0, 0
 
     COLLISION = True
+    AUTORESTART = True

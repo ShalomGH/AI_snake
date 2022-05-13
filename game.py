@@ -37,24 +37,33 @@ class Game:
         s_rect = s_surf.get_rect()
         # дефолтный случай отображаем результат слева сверху
         if choice == 1:
-            s_rect.midtop = (80, 10)
+            s_rect.midleft = (int(Settings.SCREEN_W/16), int(Settings.SCREEN_H/16))
         # при game_over отображаем результат по центру
         # под надписью game over
         else:
-            s_rect.midtop = (360, 120)
+            s_rect.midtop = (int(Settings.SCREEN_W/2), int(Settings.SCREEN_H/4))
         # рисуем прямоугольник поверх surface
         self.play_surface.blit(s_surf, s_rect)
 
-    def game_over(self):
+    def game_over(self, snake):
         """Функция для вывода надписи Game Over и результатов
         в случае завершения игры и выход из игры"""
-        go_font = pygame.font.SysFont('monaco', 72)
-        go_surf = go_font.render('Game over', True, Settings.GAME_OVER_COLOR)
-        go_rect = go_surf.get_rect()
-        go_rect.midtop = (360, 15)
-        self.play_surface.blit(go_surf, go_rect)
-        self.show_score(0)
-        pygame.display.flip()
-        time.sleep(3)
-        pygame.quit()
-        sys.exit()
+
+        if Settings.AUTORESTART:
+            self.score = 0
+            snake.snake_head_pos = [100, 50]  # [x, y]
+            snake.snake_body = [[100, 50], [90, 50], [80, 50], [70, 50], [60, 50], [50, 50]]
+            snake.direction = "False"
+            snake.change_to = snake.direction
+            return
+        else:
+            go_font = pygame.font.SysFont('monaco', 72)
+            go_surf = go_font.render('Game over', True, Settings.GAME_OVER_COLOR)
+            go_rect = go_surf.get_rect()
+            go_rect.midtop = (int(Settings.SCREEN_W / 2), int(Settings.SCREEN_H / 16))
+            self.play_surface.blit(go_surf, go_rect)
+            self.show_score(0)
+            pygame.display.flip()
+            time.sleep(3)
+            pygame.quit()
+            sys.exit()
