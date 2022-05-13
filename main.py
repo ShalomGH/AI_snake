@@ -4,14 +4,15 @@ from snake import Snake
 from game import Game
 from food import Food
 from vision import Vision
+from settings import Settings
 from func import init_and_check_for_errors
 
 
-colission_true = True
-game = Game()
-snake = Snake(game.green)
-food = Food(game.red, game.screen_width, game.screen_height)
+game = Game(Settings.FPS)
+snake = Snake(pygame.Color(Settings.SNAKE_COLOR))
+food = Food(Settings.FOOD_COLOR)
 vision = Vision()
+
 pushed = False
 init_and_check_for_errors()
 game.set_surface_and_title()
@@ -19,7 +20,7 @@ game.set_surface_and_title()
 
 def event_loop(change_to):
     """Функция для отслеживания нажатий клавиш игроком"""
-    # запускаем цикл по ивентам
+    # запускаем цикл по событиям
     for event in pygame.event.get():
         # если нажали клавишу
         if event.type == pygame.KEYDOWN:
@@ -45,14 +46,14 @@ while True:
 
     snake.validate_direction_and_change()
     snake.change_head_position()
-    game.score, food.food_pos = snake.snake_body_mechanism(game.score, food.food_pos, game.screen_width, game.screen_height)
+    game.score, food.food_pos = snake.snake_body_mechanism(game.score, food.food_pos)
 
-    snake.draw_snake(game.play_surface, game.white, game.screen_width, game.screen_height)
-    food.draw_food(game.play_surface)
-    vision.snake_vision(game.play_surface, snake.snake_head_pos, game.screen_width, game.screen_height)
+    snake.draw_snake(game.play_surface, Settings.SURFACE_COLOR)
+    food.draw_food(game.play_surface, )
+    vision.snake_vision(game.play_surface, snake.snake_head_pos)
 
-    if pushed and colission_true:
-        snake.check_for_boundaries(game.game_over, game.screen_width, game.screen_height)
+    if pushed and Settings.COLLISION:
+        snake.check_for_boundaries(game.game_over)
 
     game.show_score()
     game.refresh_screen()
