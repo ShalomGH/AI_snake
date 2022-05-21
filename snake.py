@@ -4,12 +4,12 @@ from settings import Settings
 
 
 class Snake:
-    def __init__(self, snake_color):
+    def __init__(self, snake_color: tuple):
         # важные переменные - позиция головы змеи и его тела
-        self.snake_head_pos = [100, 50]  # [x, y]
+        self.snake_head_pos = [50, 50]  # [x, y]
         # начальное тело змеи состоит из трех сегментов
         # голова змеи - первый элемент, хвост - последний
-        self.snake_body = [[100, 50], [90, 50], [80, 50], [70, 50], [60, 50], [50, 50]]
+        self.snake_body = [[50, 50], [50, 50], [50, 50], [50, 50], [50, 50]]
         self.snake_color = snake_color
         # направление движения змеи, изначально
         # зададимся вправо
@@ -19,14 +19,11 @@ class Snake:
         # при нажатии соответствующих клавиш
         self.change_to = self.direction
 
-    def validate_direction_and_change(self):
-        """Изменяем направление движения змеи только в том случае,
-        если оно не прямо противоположно текущему"""
-        if any((self.change_to == "RIGHT" and not self.direction == "LEFT",
-                self.change_to == "LEFT" and not self.direction == "RIGHT",
-                self.change_to == "UP" and not self.direction == "DOWN",
-                self.change_to == "DOWN" and not self.direction == "UP")):
-            self.direction = self.change_to
+    # def body_generator(self):
+
+    def change_direction(self):
+        """Изменяем направление движения змеи"""
+        self.direction = self.change_to
 
     def change_head_position(self):
         """Изменяем положение головы змеи"""
@@ -42,16 +39,14 @@ class Snake:
             case "DOWN":
                 self.snake_head_pos[1] += 10
 
-    def snake_body_mechanism(self, score, food_pos):
+    def snake_body_mechanism(self, score: int, food_pos: list):
         # если вставлять просто snake_head_pos,
         # то на всех трех позициях в snake_body
         # окажется один и тот же список с одинаковыми координатами
         # и мы будем управлять змеей из одного квадрата
         self.snake_body.insert(0, list(self.snake_head_pos))
         # если съели еду
-        if (self.snake_head_pos[0] == food_pos[0] and
-                self.snake_head_pos[1] == food_pos[1]):
-
+        if self.snake_head_pos == food_pos:
             # если съели еду, то задаем новое положение еды случайным
             # образом и увеличивем score на один
             food_pos = [random.randrange(1, Settings.SCREEN_W / 10) * 10,
@@ -66,7 +61,7 @@ class Snake:
             self.snake_body.pop()
         return score, food_pos
 
-    def draw_snake(self, play_surface, surface_color):
+    def draw_snake(self, play_surface: any, surface_color: tuple):
         """Отображаем все сегменты змеи"""
         play_surface.fill(surface_color)
         for pos in self.snake_body:

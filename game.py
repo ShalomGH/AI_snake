@@ -5,7 +5,7 @@ from settings import Settings
 
 
 class Game:
-    def __init__(self, fps):
+    def __init__(self, fps: int):
         self.play_surface = None
         self.fps = fps
 
@@ -29,14 +29,14 @@ class Game:
         pygame.display.flip()
         self.fps_controller.tick(self.fps)
 
-    def show_score(self, choice=1):
+    def show_score(self, choice: int = 1):
         """Отображение результата"""
         s_font = pygame.font.SysFont('monaco', 24)
         s_surf = s_font.render(
             'Score: {0}'.format(self.score), True, Settings.TEXT_COLOR)
         s_rect = s_surf.get_rect()
         # дефолтный случай отображаем результат слева сверху
-        if choice == 1:
+        if choice:
             s_rect.midleft = (int(Settings.SCREEN_W/16), int(Settings.SCREEN_H/16))
         # при game_over отображаем результат по центру
         # под надписью game over
@@ -49,7 +49,7 @@ class Game:
         """Функция для вывода надписи Game Over и результатов
         в случае завершения игры и выход из игры"""
 
-        if Settings.AUTORESTART:
+        if Settings.AUTORESTART_GAME:
             self.score = 0
             snake.snake_head_pos = [100, 50]  # [x, y]
             snake.snake_body = [[100, 50], [90, 50], [80, 50], [70, 50], [60, 50], [50, 50]]

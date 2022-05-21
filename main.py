@@ -7,14 +7,16 @@ from vision import Vision
 from settings import Settings
 from func import init_and_check_for_errors
 
+
+init_and_check_for_errors()
+
 game = Game(Settings.FPS)
-snake = Snake(pygame.Color(Settings.SNAKE_COLOR))
+snake = Snake(Settings.SNAKE_COLOR)
 food = Food(Settings.FOOD_COLOR)
 vision = Vision()
 
-pushed = False
-init_and_check_for_errors()
 game.set_surface_and_title()
+pushed = False
 
 
 def event_loop(change_to):
@@ -43,12 +45,12 @@ def event_loop(change_to):
 while True:
     snake.change_to = event_loop(snake.change_to)
 
-    snake.validate_direction_and_change()
+    snake.change_direction()
     snake.change_head_position()
     game.score, food.food_pos = snake.snake_body_mechanism(game.score, food.food_pos)
 
     snake.draw_snake(game.play_surface, Settings.SURFACE_COLOR)
-    food.draw_food(game.play_surface, )
+    food.draw_food(game.play_surface)
     vision.snake_vision(game.play_surface, snake.snake_head_pos)
 
     if pushed and Settings.COLLISION:

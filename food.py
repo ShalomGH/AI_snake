@@ -4,7 +4,7 @@ from settings import Settings
 
 
 class Food:
-    def __init__(self, food_color):
+    def __init__(self, food_color: tuple):
         """Инициализации еды"""
         self.food_color = food_color
         self.food_size_x = 10

@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 from settings import Settings
 
 
@@ -8,7 +7,7 @@ class Vision:
         self.size = 11
         self.neighbors = np.zeros([self.size, self.size])
 
-    def snake_vision(self, play_surface, snake_head_pos):
+    def snake_vision(self, play_surface, snake_head_pos: tuple):
         for x in range(- int(self.size / 2), int(self.size / 2) + 1):
             for y in range(- int(self.size / 2), int(self.size / 2) + 1):
                 temp_x = snake_head_pos[0] + x * 10 + 5
@@ -28,10 +27,6 @@ class Vision:
                             print(pixel_color)
                             temp_color = 1
                     self.neighbors[y + 5][x + 5] = temp_color
-        fig, ax = plt.subplots()
 
-        ax.imshow(self.neighbors)
-
-        fig.set_figwidth(6)  # ширина и
-        fig.set_figheight(6)  # высота "Figure"
-        #plt.show()
+        print(self.neighbors)
+        print()
