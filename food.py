@@ -1,3 +1,4 @@
+import numpy as np
 import pygame
 import random
 from settings import Settings
@@ -9,8 +10,8 @@ class Food:
         self.food_color = food_color
         self.food_size_x = 10
         self.food_size_y = 10
-        self.food_pos = [random.randrange(1, Settings.SCREEN_W/10)*10,
-                         random.randrange(1, Settings.SCREEN_H/10)*10]
+        self.food_pos = np.array([random.randrange(1, Settings.SCREEN_W / 10) * 10,
+                                  random.randrange(1, Settings.SCREEN_H / 10) * 10])
 
     def draw_food(self, play_surface):
         """Отображение еды"""

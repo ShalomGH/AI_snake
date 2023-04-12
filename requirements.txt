@@ -1,2 +1,5 @@
-numpy
-pygame
+numpy==1.22.4
+pygame~=2.1.2
+matplotlib
+tensorflow==2.9.0
+gym~=0.23.1
