@@ -10,20 +10,18 @@ from func import init_and_check_for_errors
 
 init_and_check_for_errors()
 
-game = Game(Settings.FPS)
-snake = Snake(Settings.SNAKE_COLOR)
+game: Game = Game(Settings.FPS)
+snake: Snake = Snake(Settings.SNAKE_COLOR)
 food = Food(Settings.FOOD_COLOR)
 vision = Vision()
 
 game.set_surface_and_title()
-pushed = False
+pushed: bool = False
 
 
-def event_loop(change_to):
+def event_loop(change_to) -> str:
     """Функция для отслеживания нажатий клавиш игроком"""
-    # запускаем цикл по событиям
     for event in pygame.event.get():
-        # если нажали клавишу
         if event.type == pygame.KEYDOWN:
             global pushed
             pushed = True
@@ -35,7 +33,6 @@ def event_loop(change_to):
                 change_to = "UP"
             elif event.key == pygame.K_DOWN or event.key == ord('s'):
                 change_to = "DOWN"
-            # нажали escape
             elif event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 sys.exit()

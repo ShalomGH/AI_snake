@@ -8,13 +8,7 @@ class Game:
     def __init__(self, fps: int):
         self.play_surface = None
         self.fps = fps
-
-        # Frame per second controller
-        # будет задавать количество кадров в секунду
         self.fps_controller = pygame.time.Clock()
-
-        # переменная для отображения результата
-        # (сколько еды съели)
         self.score = 0
 
     def set_surface_and_title(self):
@@ -35,14 +29,10 @@ class Game:
         s_surf = s_font.render(
             'Score: {0}'.format(self.score), True, Settings.TEXT_COLOR)
         s_rect = s_surf.get_rect()
-        # дефолтный случай отображаем результат слева сверху
         if choice:
             s_rect.midleft = (int(Settings.SCREEN_W/16), int(Settings.SCREEN_H/16))
-        # при game_over отображаем результат по центру
-        # под надписью game over
         else:
             s_rect.midtop = (int(Settings.SCREEN_W/2), int(Settings.SCREEN_H/4))
-        # рисуем прямоугольник поверх surface
         self.play_surface.blit(s_surf, s_rect)
 
     def game_over(self, snake):
@@ -51,7 +41,7 @@ class Game:
 
         if Settings.AUTORESTART_GAME:
             self.score = 0
-            snake.snake_head_pos = [100, 50]  # [x, y]
+            snake.snake_head_pos = [100, 50]
             snake.snake_body = [[100, 50], [90, 50], [80, 50], [70, 50], [60, 50], [50, 50]]
             snake.direction = "False"
             snake.change_to = snake.direction
