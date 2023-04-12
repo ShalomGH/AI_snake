@@ -13,7 +13,7 @@ class Vision:
                 temp_x = snake_head_pos[0] + x * 10 + 5
                 temp_y = snake_head_pos[1] + y * 10 + 5
                 if temp_x <= 0 or temp_x >= Settings.SCREEN_W or temp_y <= 0 or temp_y >= Settings.SCREEN_H:
-                    self.neighbors[y + 5][x + 5] = 1
+                    self.neighbors[y + int(self.size / 2)][x + int(self.size / 2)] = 1
                 else:
                     pixel_color = str(play_surface.get_at((temp_x, temp_y)))
                     match pixel_color:
@@ -26,7 +26,7 @@ class Vision:
                         case _:
                             print(pixel_color)
                             temp_color = 1
-                    self.neighbors[y + 5][x + 5] = temp_color
+                    self.neighbors[y + int(self.size / 2)][x + int(self.size / 2)] = temp_color
 
         print(self.neighbors)
         print()

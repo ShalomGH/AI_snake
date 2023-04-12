@@ -27,13 +27,13 @@ def event_loop(change_to):
         if event.type == pygame.KEYDOWN:
             global pushed
             pushed = True
-            if event.key == pygame.K_RIGHT or event.key == ord('d'):
+            if event.key in [pygame.K_RIGHT, pygame.K_d]:
                 change_to = "RIGHT"
-            elif event.key == pygame.K_LEFT or event.key == ord('a'):
+            elif event.key in [pygame.K_LEFT, pygame.K_a]:
                 change_to = "LEFT"
-            elif event.key == pygame.K_UP or event.key == ord('w'):
+            elif event.key in [pygame.K_UP, pygame.K_w]:
                 change_to = "UP"
-            elif event.key == pygame.K_DOWN or event.key == ord('s'):
+            elif event.key in [pygame.K_DOWN, pygame.K_s]:
                 change_to = "DOWN"
             # нажали escape
             elif event.key == pygame.K_ESCAPE:
@@ -43,7 +43,7 @@ def event_loop(change_to):
 
 
 while True:
-    snake.change_to = event_loop(snake.change_to)
+    snake.change_to = event_loop(snake.change_to)  # wasd не изменяет направление!!
 
     snake.change_direction()
     snake.change_head_position()
