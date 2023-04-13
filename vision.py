@@ -17,17 +17,17 @@ class Vision:
                 if temp_x <= 0 or temp_x >= Settings.SCREEN_W or temp_y <= 0 or temp_y >= Settings.SCREEN_H:
                     self.neighbors[y + int(self.size / 2)][x + int(self.size / 2)] = 1
                 else:
-                    pixel_color = str(play_surface.get_at((temp_x, temp_y)))
+                    pixel_color = play_surface.get_at((temp_x, temp_y))
                     match pixel_color:
-                        case "(156, 159, 163, 255)":
-                            temp_color = 0
-                        case "(255, 0, 0, 255)":
+                        case Settings.SURFACE_COLOR:
                             temp_color = 0.5
-                        case "(0, 255, 0, 255)":
+                        case Settings.FOOD_COLOR:
                             temp_color = 1
+                        case Settings.SNAKE_COLOR:
+                            temp_color = 0
                         case _:
-                            print(pixel_color)
-                            temp_color: int = 1
+                            print(f'wrong color: {pixel_color}')
+                            temp_color: int = 0
                     self.neighbors[y + int(self.size / 2)][x + int(self.size / 2)] = temp_color
 
         print(self.neighbors)
