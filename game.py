@@ -39,7 +39,7 @@ class Game:
         """Функция для вывода надписи Game Over и результатов
         в случае завершения игры и выход из игры"""
 
-        if Settings.AUTORESTART_GAME:
+        if Settings.GAME_AUTORESTART:
             self.score = 0
             snake.snake_head_pos = [100, 50]
             snake.snake_body = [[100, 50], [90, 50], [80, 50], [70, 50], [60, 50], [50, 50]]
